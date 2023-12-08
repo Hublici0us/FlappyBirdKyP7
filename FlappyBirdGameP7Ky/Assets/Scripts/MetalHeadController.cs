@@ -36,8 +36,10 @@ public class MetalHeadController : MonoBehaviour
 
     private void OnCollisionEnter2D()
     {
+        GameControl.instance.birdDied();
         isDead = true;
         anim.SetTrigger("Die");
         poly2d.offset = new Vector2(0, 4);
+        
     }
 }
