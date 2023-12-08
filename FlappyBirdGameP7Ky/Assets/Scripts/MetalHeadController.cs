@@ -8,6 +8,7 @@ public class MetalHeadController : MonoBehaviour
     bool isDead = false;
     Rigidbody2D rb2d;
     Animator anim;
+    PolygonCollider2D poly2d;
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +17,7 @@ public class MetalHeadController : MonoBehaviour
          * so we can later use it in parts of the script. */
         rb2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        poly2d = GetComponent<PolygonCollider2D>();
     }
 
     // Update is called once per frame
@@ -36,5 +38,6 @@ public class MetalHeadController : MonoBehaviour
     {
         isDead = true;
         anim.SetTrigger("Die");
+        poly2d.offset = new Vector2(0, 4);
     }
 }
