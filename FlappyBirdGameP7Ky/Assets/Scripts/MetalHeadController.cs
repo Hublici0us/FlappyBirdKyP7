@@ -9,6 +9,10 @@ public class MetalHeadController : MonoBehaviour
     Rigidbody2D rb2d;
     Animator anim;
     PolygonCollider2D poly2d;
+    AudioSource sounds;
+    public AudioClip boost;
+    public AudioClip tink;
+
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +22,7 @@ public class MetalHeadController : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         poly2d = GetComponent<PolygonCollider2D>();
+        sounds = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -29,6 +34,7 @@ public class MetalHeadController : MonoBehaviour
             {
                 rb2d.velocity = Vector2.zero;
                 rb2d.AddForce(new Vector2(0, upForce));
+                playSound(boost);
                 anim.SetTrigger("Fly");
             }
         }
@@ -37,9 +43,16 @@ public class MetalHeadController : MonoBehaviour
     private void OnCollisionEnter2D()
     {
         GameControl.instance.birdDied();
+        rb2d.velocity = Vector2.zero;
         isDead = true;
         anim.SetTrigger("Die");
-        poly2d.offset = new Vector2(0, 5);
+        playSound(tink);
+        poly2d.offset = new Vector2(0, 6);
         
+    }
+
+    public void playSound(AudioClip clip)
+    {
+        sounds.PlayOneShot(clip);
     }
 }
