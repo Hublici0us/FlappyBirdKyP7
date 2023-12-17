@@ -5,32 +5,56 @@ using UnityEngine.SceneManagement;
 
 public class SceneControl : MonoBehaviour
 {
-    private void Awake()
-    {
-        loadStartScene();
-    }
+    public GameObject titleScreen;
+    public GameObject metalHead;
+    public Canvas gameCanvas;
+    public bool gameStarted;
+    public GameObject scrollObjects;
+    public Behaviour gameControl;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        gameStarted = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (gameStarted == false)
         {
-            loadGameScene();
+            gameControl.enabled = false;
+            metalHead.SetActive(false);
+            scrollObjects.SetActive(false);
+            gameCanvas.enabled = false;
+        }
+        else if (gameStarted == true)
+        {
+            titleScreen.SetActive(false );
+            gameControl.enabled = true;
+            metalHead.SetActive(true); 
+            scrollObjects.SetActive(true);
+            gameCanvas.enabled = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && gameStarted == false)
+        {
+            gameStarted = true;
+        }
+
+        if (GameControl.instance.gameOver == true && Input.GetKeyDown(KeyCode.Escape))
+        {
+            gameControl.enabled = false;
+            titleScreen.SetActive(true);
         }
     }
 
-    void loadStartScene()
+    public void gameStart()
     {
-        SceneManager.LoadScene(sceneName: "IntroScene");
+
+        titleScreen.SetActive(false);
+
     }
 
-    void loadGameScene()
-    {
-        SceneManager.LoadScene(sceneName: "PlayScene");
-    }
+
 }

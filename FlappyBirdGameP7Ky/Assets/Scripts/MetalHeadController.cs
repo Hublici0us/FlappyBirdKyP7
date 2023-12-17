@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 public class MetalHeadController : MonoBehaviour
@@ -28,6 +29,7 @@ public class MetalHeadController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (isDead == false)
         {
             if (Input.GetKeyDown(KeyCode.Space))

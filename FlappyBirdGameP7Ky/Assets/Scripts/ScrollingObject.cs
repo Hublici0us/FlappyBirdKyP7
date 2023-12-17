@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ScrollingObject : MonoBehaviour
 {
     Rigidbody2D rb2d;
-    
 
     // Start is called before the first frame update
     void Start()

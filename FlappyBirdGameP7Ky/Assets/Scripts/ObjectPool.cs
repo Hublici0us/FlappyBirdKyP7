@@ -23,22 +23,25 @@ public class ObjectPool : MonoBehaviour
         {
             columns[i] = (GameObject)Instantiate(columnPrefab, objectPoolPosition, Quaternion.identity);
         }
-    }
+    }   
 
     // Update is called once per frame
     void Update()
     {
-        timeSinceLastSpawn += Time.deltaTime;
-
-        if (GameControl.instance.gameOver == false && timeSinceLastSpawn >= spawnRate)
+        if (enabled)
         {
-            timeSinceLastSpawn = 0;
-            float spawnYPosition = Random.Range(columnMin, columnMax);
-            columns[currentColumn].transform.position = new Vector2 (spawnXPosition, spawnYPosition);
-            currentColumn++;
-            if (currentColumn >= columnPoolSize)
+            timeSinceLastSpawn += Time.deltaTime;
+
+            if (GameControl.instance.gameOver == false && timeSinceLastSpawn >= spawnRate)
             {
-                currentColumn = 0;
+                timeSinceLastSpawn = 0;
+                float spawnYPosition = Random.Range(columnMin, columnMax);
+                columns[currentColumn].transform.position = new Vector2(spawnXPosition, spawnYPosition);
+                currentColumn++;
+                if (currentColumn >= columnPoolSize)
+                {
+                    currentColumn = 0;
+                }
             }
         }
     }
